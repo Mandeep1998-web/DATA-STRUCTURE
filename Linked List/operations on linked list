@@ -1,0 +1,270 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node{
+    int data;
+    struct node* next;
+}link;
+
+link *head=NULL,*ptr=NULL,*save=NULL,*newn=NULL;
+
+//function declaration
+void insertbeg(int );
+void display(void);
+void middle(void);
+void freq(void);
+void loopdetection(void);
+void delete_list(void);
+int main()
+{
+   
+    // head=NULL;
+    int loc,element,num=0;
+    do{
+        printf("\nEnter numbers b/w 1 to 4 which have the following meaning:\n \
+        1>ADD ELEMENT TO THE BEGINNING OF THE LIST \n \
+        2>ADD ELEMENT TO THE END OF THE LIST \n \
+        3>ADD ELEMENT TO A PARTICULAR LOCATION \n \
+        4>FINDING THE MIDDLE ELEMENT OF A LINKED LIST \n \ 
+        5>EXIT \n \
+        6>FIND THE FREQUENCY OF AN ELEMENT \n \
+        7>LOOP DETECTION \n \
+        8>DELETE ACCORDING TO KEY OR LOCATION \n \
+        Enter your choice = ");
+        scanf("%d",&num);
+        if(num==1)
+        {
+        printf("\n Enter the element you want to insert =");
+        scanf("%d",&element);
+       
+        }
+        switch(num)
+        {
+            case 1:
+             insertbeg(element);
+              printf("\n Inserted"); 
+              display();
+            break;
+             
+            case 2:
+                // insertend(element);
+                
+            //   printf("\n Inserted"); 
+            break;
+            case 3:
+            printf("\n Enter the location= ");
+            scanf("%d",&loc);
+            // insertloc(element,loc);
+             printf("\n Inserted"); 
+            break;
+            
+            case 4:
+            middle();
+            break;
+            case 5:
+            break;
+            
+            case 6:
+            freq();
+            break;
+            
+            case 7:
+            loopdetection();
+            break;
+            
+            case 8:
+            delete_list();
+            break;
+            default:
+            printf("Wrong choice Enter again!");
+            
+            
+        }//end of switch
+                
+        
+    }while(num!=5);
+    //end of do while
+
+    return 0;
+}
+
+void insertbeg(int item)
+{
+     newn=(struct node* )malloc(sizeof(struct node));
+    printf("\n Before Insertion");
+    // display();
+     newn->data=item;
+    newn->next=head;
+    head=newn;
+     printf("\n After Insertion");
+//   display();
+}//end of beg function 
+
+
+void display()
+{
+   ptr=head;
+   printf("\n");
+   while(ptr!=NULL)
+   {
+       printf("  %d",(ptr->data));
+       ptr=ptr->next;
+   }
+    
+}//end of display method
+
+void middle(void){
+    save=ptr=head;
+    if(head !=NULL){
+        
+  
+    while(ptr!=NULL && ptr->next!=NULL)
+    {
+        
+        save=save->next;
+        ptr=ptr->next->next;
+    }
+      printf("The \n the middle element is= %d ",save->data);
+    } 
+    else
+    {
+        printf("\n The list is empty");
+    }
+}//end of middle 
+
+void freq(void){
+    int item,count=0;
+    if(head!=NULL){
+        printf("\n Enter the element =");
+        scanf("%d",&item);
+        ptr=head;
+        while(ptr!=NULL){
+            if(ptr->data==item){
+                count++;
+                
+            }
+            ptr=ptr->next;
+        }//end of while
+        printf("\n %d occurs %d times in the list",item,count);
+    }//end if head condition
+    else{
+        printf("\n The List is empty kindly insert few  elements ");
+    }
+}// end of freq function
+
+void loopdetection(void){
+    long arr[100]; 
+    int i,index=-1;
+    ptr=head;
+    if(head!=NULL){
+        while(1){
+            if(ptr!=NULL){
+                arr[++index]=ptr;
+                for ( i = 0; i <=index; i++) {
+                    if(arr[i]==ptr)
+                    {
+                        printf("Loops are present ");
+                        exit(1);
+                    }
+                }      
+            }
+            else{
+                printf("Loops are not present");
+            }
+        }//end of while loop
+    }
+    else{
+        printf("\n List is empty");
+    }
+}//end of loopdetection function
+
+
+
+void delete_list(void){
+    int temp,lockey,value=0;
+    do{
+    display();
+    printf("\n Delete According to key or location 1 or 2?(press 3 to escape)\n");
+    scanf("%d",&value);
+    
+    switch(value){
+        case 1:
+               printf("\n Enter the item= ");
+               scanf("%d",&lockey);
+               
+               ptr=save=head;
+               while(ptr!=NULL && ptr->data!=lockey){
+                   save=ptr;
+                   ptr=ptr->next;
+               }//end of while
+               
+               if(ptr==NULL){
+                   return;
+               }
+               
+               save->next=ptr->next;
+               free(ptr);
+               printf("\nITEM DELETED");
+
+               
+        break;
+        case 2:
+        temp=1;
+        printf("\n Enter the location");
+        scanf("%d",&lockey);
+        
+        save=ptr=head;
+        
+        if(lockey==1){
+            head=ptr->next;
+            free(ptr);
+            
+        }
+        else{
+         
+        while(ptr!=NULL&&temp!=lockey){
+            ++temp;
+            save=ptr;
+          ptr=ptr->next;
+        }//end of while
+        
+        save->next=ptr->next;
+        ptr->next=NULL;
+        free(ptr);
+        }//end of else
+        if(ptr==NULL){
+            printf("Location not found");
+            return;
+        }
+        
+        
+                   
+        break;
+        case 3:
+        break;
+        default:
+        printf("WRONG CHOICE ");
+        
+    }//end of switch
+}while(value !=3);
+}//end of delete_list function
+
+
+
+
+
+
+
+
+
+
+
+
