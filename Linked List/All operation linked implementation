@@ -1,0 +1,87 @@
+
+#include<stdio.h>
+#include<stdlib.h>
+  struct node
+{
+    int data;
+    struct node *next;
+};
+    typedef struct node NODE;
+    int choice=1;
+    NODE *head,*newnode,*temp;
+   
+//function declaration
+void createlist(void );
+void insert_at_beg(void);
+void insert_after_loc(void);
+void insert_at_end(void);
+void delete_node(void);
+void terminate(void);
+int main(){
+    int n;
+    do{
+        printf("Enter 1 for create a link list\n");
+        printf("Enter 2 for insert in beginning of a linked list\n");
+        printf("Enter 3 for insert after any location \n");
+        printf("Enter 4 for inserting at the end \n");
+        printf("Enter 5 for delete the node\n");
+        printf("Enter 6 to terminate\n");
+        printf("Enter the choice :");
+        scanf("%d",&n);
+        switch(n){
+            case 1:
+            createlist();
+            break;
+           // case 2:
+          //  insert_at_beg();
+           // break;
+           // case 3:
+           // insert_after_loc();
+           // break;
+            //case 4:
+            //insert_at_end();
+            //break;
+            //case 5:
+           // delete_node();
+           // break;
+            case 6:
+            terminate();
+            break;
+        }
+       
+    }
+        while(n!=6);
+}
+void createlist(){
+     head=0;
+    int choice=1;
+    while(choice==1){
+        newnode=(NODE *)malloc(sizeof(NODE));
+        printf("Enter data item\n");
+        scanf("%d",&newnode-> data);
+        newnode->next=0;
+        if(head==0)
+        {
+         head=temp=newnode;
+
+        }
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+        printf("Do you want to continue:(Type 0 or 1)?\n");
+        fflush(stdin);
+        scanf("%d",&choice);
+    }
+    temp=head;
+    printf("Linked list items: ");
+    while(temp!=0)
+    {
+        printf("%d  ",temp->data);
+        temp=temp->next;
+    }
+}
+void terminate(){
+    exit;
+}
