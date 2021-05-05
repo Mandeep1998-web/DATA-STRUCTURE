@@ -20,7 +20,7 @@ void terminate(void);
 int main(){
     int n;
     do{
-        printf("Enter 1 for create a link list\n");
+        printf("\n Enter 1 for create a link list\n");
         printf("Enter 2 for insert in beginning of a linked list\n");
         printf("Enter 3 for insert after any location \n");
         printf("Enter 4 for inserting at the end \n");
@@ -32,15 +32,15 @@ int main(){
             case 1:
             createlist();
             break;
-           // case 2:
-          //  insert_at_beg();
-           // break;
-           // case 3:
-           // insert_after_loc();
-           // break;
-            //case 4:
-            //insert_at_end();
-            //break;
+            case 2:
+           insert_at_beg();
+           break;
+            case 3:
+            insert_at_end();
+            break;
+            case 4:
+           insert_after_loc();
+           break;
             //case 5:
            // delete_node();
            // break;
@@ -75,13 +75,48 @@ void createlist(){
         scanf("%d",&choice);
     }
     temp=head;
-    printf("Linked list items: ");
+    printf("Your created linked list items are: ");
     while(temp!=0)
     {
-        printf("%d  ",temp->data);
+        printf("\n%d  ",temp->data);
         temp=temp->next;
     }
 }
+///////////////////////////////////////
+void insert_at_beg(){
+  newnode=(NODE *)malloc(sizeof(NODE));
+  printf("Enter data you want to insert");
+  scanf("%d",&newnode->data);
+  newnode->next=head;
+  head=newnode;
+  temp=head;
+  printf("Your created linked list items are: ");
+    while(temp!=0)
+    {
+        printf("\n%d  ",temp->data);
+        temp=temp->next;
+    }
+}
+/////////////////////////////////////////
+void insert_at_end(){
+    newnode=(NODE*)malloc(sizeof(NODE));
+    printf("Enter the value that you want to insert at the end");
+    scanf("%d",&newnode->data);
+    temp=head;
+    while(temp->next!=0){ //* here important thing is temp->next!=0 and when we have to traverse we always take temp!=0
+        temp=temp->next;
+    }
+    temp->next=newnode;
+    temp=head;
+  printf("Your created linked list items are: ");
+    while(temp!=0)
+    {
+        printf("\n%d  ",temp->data);
+        temp=temp->next;
+    }
+}
+////////////////////////////////////////////
+void 
 void terminate(){
     exit;
 }
