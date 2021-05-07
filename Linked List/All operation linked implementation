@@ -17,6 +17,7 @@ void insert_after_loc(void);
 void insert_at_end(void);
 void delete_node(void);
 void terminate(void);
+int count();
 int main(){
     int n;
     do{
@@ -36,10 +37,10 @@ int main(){
            insert_at_beg();
            break;
             case 3:
-            insert_at_end();
+              insert_after_loc();
             break;
             case 4:
-           insert_after_loc();
+                 insert_at_end();
            break;
             //case 5:
            // delete_node();
@@ -103,7 +104,7 @@ void insert_at_end(){
     printf("Enter the value that you want to insert at the end");
     scanf("%d",&newnode->data);
     temp=head;
-    while(temp->next!=0){ //* here important thing is temp->next!=0 and when we have to traverse we always take temp!=0
+    while(temp->next!=0){ //**here important thing is temp->next!=0 and when we have to traverse we always take temp!=0
         temp=temp->next;
     }
     temp->next=newnode;
@@ -116,7 +117,40 @@ void insert_at_end(){
     }
 }
 ////////////////////////////////////////////
-void 
+void insert_after_loc(){
+    int loc;
+      int i=1;//***********dont put i=0
+        newnode=(NODE*)malloc(sizeof(NODE));
+     //    int counting=count();
+       //printf("%d",counting);
+        printf("Enter the location");
+        scanf("%d",&loc);
+    temp=head;
+    printf("\nEnter the item");
+    scanf("%d",&newnode->data);
+     while(i<loc)
+       {
+      temp=temp->next;
+      i++;
+      }
+      newnode->next=temp->next;
+      temp->next=newnode;
+      
+      temp=head;
+  printf("Your updated linked list items are: ");
+    while(temp!=0)
+    {
+        printf("\n%d  ",temp->data);
+        temp=temp->next;
+    }
+}
+//int count(){
+  //  temp=head;
+  //  int count=0;
+    //while(temp!=0){
+  //      count++;
+  //  }
+//}
 void terminate(){
     exit;
 }
