@@ -16,6 +16,7 @@ void insert_at_beg(void);
 void insert_after_loc(void);
 void insert_at_end(void);
 void delete_node(void);
+void reverselinkedlist(void);
 void terminate(void);
 int count();
 int main(){
@@ -26,7 +27,7 @@ int main(){
         printf("Enter 3 for insert after any location \n");
         printf("Enter 4 for inserting at the end \n");
         printf("Enter 5 for delete the node\n");
-        printf("Enter 6 to terminate\n");
+        printf("Enter 6 to Reverse the link list\n");
         printf("Enter the choice :");
         scanf("%d",&n);
         switch(n){
@@ -46,7 +47,7 @@ int main(){
            delete_node();
            break;
             case 6:
-            terminate();
+            reverselinkedlist();
             break;
         }
        
@@ -179,6 +180,30 @@ void delete_node(){
         //case 3:
     }
     
+}
+//////////////////////////////////////////////
+void reverselinkedlist(){
+    struct node *p;
+    struct node *q;
+    struct node *r;
+    struct node *trav;
+    //they are called sliding pointers
+    p=head;
+    q=NULL;
+    r=NULL;
+    while(p!=NULL){
+        r=q;
+        q=p;
+        p=p->next;
+        q->next=r;
+    }
+    head=q;
+trav=head;
+printf("Linked list after reversing the elements\n");
+while(trav!=NULL){
+    printf(" %d",trav->data);
+    trav=trav->next;
+}
 }
 //int count(){
   //  temp=head;
